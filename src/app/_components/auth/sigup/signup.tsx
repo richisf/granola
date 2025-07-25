@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 import { Button } from "~/app/_components/ui/button";
 import { Input } from "~/app/_components/ui/input";
 import { Label } from "~/app/_components/ui/label";
@@ -18,8 +19,26 @@ export function SignupForm() {
   const router = useRouter();
 
   const registerMutation = api.auth.register.useMutation({
-    onSuccess: () => {
-      router.push("/login?message=Account created successfully");
+    onSuccess: async () => {
+      // Automatically sign in the user after successful registration
+      try {
+        const result = await signIn("credentials", {
+          username: email,
+          password,
+          redirect: false,
+        });
+
+        if (result?.error) {
+          setError("Account created but automatic login failed. Please sign in manually.");
+          router.push("/login");
+        } else {
+          // Successfully logged in, redirect to dashboard
+          router.push("/dashboard");
+        }
+      } catch (error) {
+        setError("Account created but automatic login failed. Please sign in manually.");
+        router.push("/login");
+      }
     },
     onError: (error) => {
       setError(error.message);

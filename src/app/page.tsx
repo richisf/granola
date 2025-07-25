@@ -1,38 +1,51 @@
-import Link from "next/link";
-import { auth } from "~/server/auth";
-import { redirect } from "next/navigation";
-import { Button } from "~/app/_components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/app/_components/ui/card";
+"use client";
 
-export default async function Home() {
-  const session = await auth();
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { useIsMobile } from "~/app/_components/hooks/use-mobile";
+import { DesktopLayout } from "~/app/_components/landing/desktop/layout";
+import { DesktopBody } from "~/app/_components/landing/desktop/body";
+import { MobileLayout } from "~/app/_components/landing/mobile/layout";
+import { MobileBody } from "~/app/_components/landing/mobile/body";
 
-  if (session?.user) {
-    redirect("/dashboard");
+export default function Home() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  const isMobile = useIsMobile();
+
+  useEffect(() => {
+    if (status === "authenticated" && session?.user) {
+      router.push("/dashboard");
+    }
+  }, [session, status, router]);
+
+  // Show loading state while checking auth
+  if (status === "loading") {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-gray-600">Loading...</div>
+      </div>
+    );
   }
 
-  return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="max-w-md w-full p-6">
-        <Card>
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl">Welcome to Atomatio</CardTitle>
-            <CardDescription>
-              The AI-native ERP - Get started with your account
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-4">
-              <Button asChild className="w-full">
-                <Link href="/login">Sign In</Link>
-              </Button>
-              <Button asChild variant="outline" className="w-full">
-                <Link href="/sigin">Sign Up</Link>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
-  );
+  // Don't render landing page if user is authenticated
+  if (status === "authenticated") {
+    return null;
+  }
+
+  // Show desktop version by default until mobile detection is complete
+  if (isMobile === undefined) {
+    return <DesktopLayout />;
+  }
+
+  if (isMobile) {
+    return (
+      <MobileLayout>
+        <MobileBody />
+      </MobileLayout>
+    );
+  }
+
+  return <DesktopLayout />;
 }

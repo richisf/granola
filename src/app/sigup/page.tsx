@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SignupForm } from "~/app/_components/auth/sigup/signup";
+import { Button } from "~/app/_components/ui/button";
 
 export default function SignupPage() {
   return (
@@ -10,12 +11,9 @@ export default function SignupPage() {
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
             Already have an account?{" "}
-            <Link 
-              href="/login" 
-              className="font-medium text-primary hover:underline"
-            >
-              Sign in
-            </Link>
+            <Button variant="link" className="h-auto p-0 text-sm font-medium" asChild>
+              <Link href="/login">Sign in</Link>
+            </Button>
           </p>
         </div>
       </div>

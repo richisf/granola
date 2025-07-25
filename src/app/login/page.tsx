@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LoginForm } from "~/app/_components/auth/login/login";
+import { Button } from "~/app/_components/ui/button";
 
 export default function LoginPage() {
   return (
@@ -10,12 +11,9 @@ export default function LoginPage() {
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
             Don&apos;t have an account?{" "}
-            <Link 
-              href="/sigin" 
-              className="font-medium text-primary hover:underline"
-            >
-              Sign up
-            </Link>
+            <Button variant="link" className="h-auto p-0 text-sm font-medium" asChild>
+              <Link href="/sigup">Sign up</Link>
+            </Button>
           </p>
         </div>
       </div>
