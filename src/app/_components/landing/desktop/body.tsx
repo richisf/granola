@@ -2,12 +2,13 @@ import Link from "next/link";
 import { Button } from "~/app/_components/ui/button";
 import { Card, CardContent } from "~/app/_components/ui/card";
 import { Badge } from "~/app/_components/ui/badge";
+import { DashboardPreview } from "../dashboard-preview";
 
 export function DesktopBody() {
   return (
-    <div className="bg-white">
+    <div className="bg-white mt-12">
       {/* Hero Section */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-10">
+      <div className="mx-auto w-full sm:max-w-[95%] md:max-w-[92%] lg:max-w-[88%] xl:max-w-[85%] px-4 py-10">
         {/* Announcement banner */}
         <div className="text-center mb-6">
           <Badge variant="outline" className="rounded-full px-4 py-1 text-sm">
@@ -42,14 +43,8 @@ export function DesktopBody() {
       </div>
 
       {/* Dashboard Preview Section */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-6">
-  
-        <Card className="overflow-hidden ">
-          <CardContent className="min-h-[600px] flex items-center justify-center">
-            <div className="text-center">
-            </div>
-          </CardContent>
-        </Card>
+      <div className="mx-auto w-full sm:max-w-[95%] md:max-w-[92%] lg:max-w-[88%] xl:max-w-[85%] px-4 py-6">
+        <DashboardPreview />
       </div>
       
     </div>

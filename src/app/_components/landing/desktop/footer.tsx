@@ -5,7 +5,7 @@ import { Button } from "~/app/_components/ui/button";
 export function DesktopFooter() {
   return (
     <footer className="bg-black text-white">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-16">
+      <div className="mx-auto w-full sm:max-w-[95%] md:max-w-[92%] lg:max-w-[88%] xl:max-w-[85%] px-4 py-16">
         <div className="grid grid-cols-2 md:grid-cols-6 gap-8">
           {/* Logo and Social */}
           <div className="col-span-2 md:col-span-1">
