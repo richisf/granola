@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowUpDown, Filter, MoreHorizontal, Plus } from "lucide-react";
+import { ArrowUpDown, MoreHorizontal, Plus } from "lucide-react";
 import { companies, type Company } from "./data/entries";
 import { Button } from "~/app/_components/ui/button";
 import { Badge } from "~/app/_components/ui/badge";
@@ -115,35 +115,7 @@ export function CompaniesTable() {
   };
 
   return (
-    <div className="h-full flex flex-col">
-      {/* Table Header Controls */}
-      <div className="flex items-center justify-between px-6 py-3 border-b bg-gray-50 flex-shrink-0">
-        <div className="flex items-center space-x-2">
-          <Badge variant="secondary" className="bg-green-100 text-green-800 text-xs">
-            Top companies
-          </Badge>
-          <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
-            <ArrowUpDown className="h-3 w-3" />
-          </Button>
-        </div>
-        
-        <div className="flex items-center space-x-2">
-          <Button variant="outline" size="sm" className="h-7 text-xs">
-            Sorted by Last email interaction
-          </Button>
-          <Button variant="outline" size="sm" className="h-7 text-xs">
-            <Filter className="mr-1 h-3 w-3" />
-            Advanced filter
-            <Badge variant="secondary" className="ml-1 text-xs">3</Badge>
-          </Button>
-          <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
-            <Plus className="h-3 w-3" />
-          </Button>
-        </div>
-      </div>
-
-      {/* Table - Full height with scroll */}
-      <div className="flex-1 overflow-auto">
+    <div className="flex-1 overflow-auto">
         <Table>
           <TableHeader className="sticky top-0 bg-white border-b">
             <TableRow className="h-12">
@@ -295,6 +267,5 @@ export function CompaniesTable() {
           </TableBody>
         </Table>
       </div>
-    </div>
   );
 }

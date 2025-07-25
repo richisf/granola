@@ -2,7 +2,7 @@
 
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Search, Settings, Download, ChevronDown, MoreVertical } from "lucide-react";
+import { Search } from "lucide-react";
 import { Button } from "~/app/_components/ui/button";
 import { Input } from "~/app/_components/ui/input";
 import {
@@ -36,6 +36,9 @@ export function DashboardHeader({ activeSection }: DashboardHeaderProps) {
   };
 
   const sectionTitle = sectionTitles[activeSection] ?? "Dashboard";
+  
+  // Get first letter of user's name for avatar
+  const userInitial = session?.user?.name?.charAt(0)?.toUpperCase() ?? "U";
 
   return (
     <header className="border-b bg-white flex-shrink-0">
@@ -48,11 +51,10 @@ export function DashboardHeader({ activeSection }: DashboardHeaderProps) {
       >
         {/* Left side - Section info */}
         <div className="flex items-center">
-          <span className="text-sm font-medium">{sectionTitle}</span>
         </div>
 
-        {/* Right side - Actions and user */}
-        <div className="flex items-center space-x-3">
+        {/* Right side - Search and user */}
+        <div className="flex items-center space-x-4">
           {/* Search */}
           <div className="relative">
             <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
@@ -62,53 +64,22 @@ export function DashboardHeader({ activeSection }: DashboardHeaderProps) {
             />
           </div>
 
-          {/* Quick Actions */}
-          <Button variant="outline" size="sm" className="h-8 text-xs">
-            Quick actions
-          </Button>
-
-          {/* View Settings */}
-          <Button variant="outline" size="sm" className="h-8 text-xs">
-            <Settings className="mr-1 h-3 w-3" />
-            View settings
-          </Button>
-
-          {/* Import/Export */}
-          <Button variant="outline" size="sm" className="h-8 text-xs">
-            <Download className="mr-1 h-3 w-3" />
-            Import / Export
-            <ChevronDown className="ml-1 h-3 w-3" />
-          </Button>
-
-          {/* User avatars */}
-          <div className="flex items-center -space-x-1">
-            <Avatar className="h-6 w-6 ring-1 ring-white">
-              <AvatarFallback className="bg-blue-500 text-white text-xs">U1</AvatarFallback>
-            </Avatar>
-            <Avatar className="h-6 w-6 ring-1 ring-white">
-              <AvatarFallback className="bg-orange-500 text-white text-xs">U2</AvatarFallback>
-            </Avatar>
-            <Avatar className="h-6 w-6 ring-1 ring-white">
-              <AvatarFallback className="bg-green-500 text-white text-xs">U3</AvatarFallback>
-            </Avatar>
-            <Button variant="outline" size="sm" className="h-6 w-6 rounded-full p-0 ml-1 text-xs">
-              +1
-            </Button>
-          </div>
-
-          {/* More menu */}
+          {/* User dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
-                <MoreVertical className="h-3 w-3" />
+              <Button variant="ghost" className="h-8 w-8 p-0 rounded-full">
+                <Avatar className="h-8 w-8">
+                  <AvatarFallback className="bg-blue-500 text-white text-sm">
+                    {userInitial}
+                  </AvatarFallback>
+                </Avatar>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent align="end" className="w-48">
               <DropdownMenuLabel>
                 {session?.user?.name ?? "User"}
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem onClick={handleLogout}>
                 Log out
               </DropdownMenuItem>

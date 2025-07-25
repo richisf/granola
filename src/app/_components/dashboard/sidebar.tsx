@@ -42,7 +42,7 @@ const navigationItems = [
 
 export function DashboardSidebar({ activeSection, onSectionChange }: SidebarProps) {
   return (
-    <div className="flex h-full w-64 flex-col bg-white border-r">
+    <div className="flex h-full w-64 flex-col bg-gray-50 border-r">
       {/* Basepoint branding - exact height match with header including border */}
       <div 
         className="flex items-center px-4 border-b" 
