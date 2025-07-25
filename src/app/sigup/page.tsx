@@ -1,20 +1,20 @@
 import Link from "next/link";
-import { LoginForm } from "~/app/_components/auth/login/login";
+import { SignupForm } from "~/app/_components/auth/sigup/signup";
 
-export default function LoginPage() {
+export default function SignupPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="w-full max-w-md p-6">
-        <LoginForm />
+        <SignupForm />
         
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
-            Don&apos;t have an account?{" "}
+            Already have an account?{" "}
             <Link 
-              href="/sigin" 
+              href="/login" 
               className="font-medium text-primary hover:underline"
             >
-              Sign up
+              Sign in
             </Link>
           </p>
         </div>

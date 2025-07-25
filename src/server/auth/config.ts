@@ -54,7 +54,7 @@ export const authConfig = {
 
         const isPasswordValid = await bcrypt.compare(
           credentials.password as string,
-          user.password
+          user.password as string
         );
         
         if (!isPasswordValid) {
@@ -70,7 +70,7 @@ export const authConfig = {
     })
   ],
   pages: {
-    signIn: "/signin",
+    signIn: "/login",
   },
   adapter: PrismaAdapter(db),
   session: {

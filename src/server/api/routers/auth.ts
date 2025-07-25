@@ -1,4 +1,5 @@
 import { z } from "zod";
+import bcrypt from "bcryptjs";
 
 import {
   createTRPCRouter,
@@ -6,12 +7,47 @@ import {
   publicProcedure,
 } from "~/server/api/trpc";
 
+const registerSchema = z.object({
+  name: z.string().min(2),
+  email: z.string().email(),
+  password: z.string().min(6),
+});
+
 export const authRouter = createTRPCRouter({
-  createUser: publicProcedure
-    .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
+  register: publicProcedure
+    .input(registerSchema)
+    .mutation(async ({ ctx, input }) => {
+      const { name, email, password } = input;
+
+      // Check if user already exists
+      const existingUser = await ctx.db.user.findUnique({
+        where: { email },
+      });
+
+      if (existingUser) {
+        throw new Error("User already exists");
+      }
+
+      // Hash password
+      const hashedPassword = await bcrypt.hash(password, 12);
+
+      // Create user
+      const user = await ctx.db.user.create({
+        data: {
+          name,
+          email,
+          password: hashedPassword,
+        },
+      });
+
       return {
-        greeting: `Hello ${input.text}`,
+        id: user.id,
+        name: user.name,
+        email: user.email,
       };
     }),
+
+  getSession: publicProcedure.query(({ ctx }) => {
+    return ctx.session;
+  }),
 });
