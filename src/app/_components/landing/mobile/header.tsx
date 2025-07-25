@@ -9,7 +9,7 @@ export function MobileHeader() {
           {/* Logo */}
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2">
-              <div className="text-xl font-bold text-gray-900">attio</div>
+              <div className="text-xl font-bold text-gray-900">atomatmio</div>
             </Link>
           </div>
 

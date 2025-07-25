@@ -11,7 +11,7 @@ export function MobileBody() {
         {/* Announcement banner */}
         <div className="text-center mb-8">
           <Badge variant="outline" className="rounded-full px-3 py-1 text-xs">
-            <span>Attio for desktop is here</span>
+            <span>Atomatio for desktop is here</span>
             <svg className="ml-1 w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
@@ -27,7 +27,7 @@ export function MobileBody() {
           </h1>
           
           <p className="mt-6 text-lg text-gray-600 leading-relaxed">
-            Attio is the AI-native CRM that builds, scales and grows your company to the next level.
+            Atomatio is the AI-native CRM that builds, scales and grows your company to the next level.
           </p>
 
           <div className="mt-8 flex flex-col gap-3">

@@ -12,7 +12,7 @@ export function DesktopBody() {
         {/* Announcement banner */}
         <div className="text-center mb-6">
           <Badge variant="outline" className="rounded-full px-4 py-1 text-sm">
-            <span>Attio for desktop is here</span>
+            <span>Atomatio for desktop is here</span>
             <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
@@ -28,7 +28,7 @@ export function DesktopBody() {
           </h1>
           
           <p className="mt-4 text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed">
-            Attio is the AI-native CRM that builds, scales and grows your company to the next level.
+            Atomatio is the AI-native CRM that builds, scales and grows your company to the next level.
           </p>
 
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
