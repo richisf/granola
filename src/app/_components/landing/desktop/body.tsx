@@ -26,11 +26,11 @@ export function DesktopBody() {
             relationship magic.
           </h1>
           
-          <p className="mt-6 text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-4 text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed">
             Attio is the AI-native CRM that builds, scales and grows your company to the next level.
           </p>
 
-          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" asChild>
               <Link href="/sigup">Start for free</Link>
             </Button>
@@ -42,7 +42,7 @@ export function DesktopBody() {
       </div>
 
       {/* Dashboard Preview Section */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-12">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-6">
         
         <Card className="overflow-hidden shadow-2xl">
           <CardContent className="bg-gray-50 p-8 min-h-[600px] flex items-center justify-center">
