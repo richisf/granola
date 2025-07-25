@@ -43,17 +43,15 @@ export function DesktopBody() {
 
       {/* Dashboard Preview Section */}
       <div className="mx-auto max-w-7xl px-6 lg:px-8 py-6">
-        
-        <Card className="overflow-hidden shadow-2xl">
-          <CardContent className="bg-gray-50 p-8 min-h-[600px] flex items-center justify-center">
+  
+        <Card className="overflow-hidden ">
+          <CardContent className="min-h-[600px] flex items-center justify-center">
             <div className="text-center">
-              <div className="text-6xl mb-4">📊</div>
-              <p className="text-gray-600">Dashboard Preview</p>
-              <p className="text-sm text-gray-400 mt-2">Interactive CRM interface coming soon</p>
             </div>
           </CardContent>
         </Card>
       </div>
+      
     </div>
   );
 }
