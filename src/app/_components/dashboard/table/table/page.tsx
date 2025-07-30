@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ArrowUpDown, MoreHorizontal, Plus } from "lucide-react";
-import { companies, type Company } from "./data/entries";
+import { companies, type Company } from "./data/types";
 import { Button } from "~/app/_components/ui/button";
 import { Badge } from "~/app/_components/ui/badge";
 import {
