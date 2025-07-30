@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Button } from "~/app/_components/ui/button";
 import { Card, CardContent } from "~/app/_components/ui/card";
 import { Badge } from "~/app/_components/ui/badge";
-import { DashboardPreview } from "../dashboard-preview";
+import { DashboardPreview } from "./dashboard-preview";
 
 export function DesktopBody() {
   return (
