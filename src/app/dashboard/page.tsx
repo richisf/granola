@@ -8,7 +8,7 @@ import { DashboardSidebar } from "~/app/_components/dashboard/sidebar";
 import { TableLayout } from "~/app/_components/dashboard/table/layout";
 import { NotesLayout } from "~/app/_components/dashboard/notes/layout";
 import { NotificationsLayout } from "~/app/_components/dashboard/notifications/layout";
-import { TasksLayout } from "~/app/_components/dashboard/tasks/layouts";
+import { TasksLayout } from "~/app/_components/dashboard/tasks/layout";
 import { Skeleton } from "~/app/_components/ui/skeleton";
 
 export default function DashboardPage() {
