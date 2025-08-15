@@ -44,7 +44,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geist.variable}`}>
       <head>
-        <meta name="google-site-verification" content="X9CNFwxxpc5CLR1utE-mhOZ0zDTT5S5OsuP4EfHZI2s" />
       </head>
       <body className="font-sans" style={{ fontFamily: "var(--font-geist-sans), Arial, sans-serif" }}>
         <SessionProvider>
