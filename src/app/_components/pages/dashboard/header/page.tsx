@@ -55,15 +55,7 @@ export function Header({ activeSection }: HeaderProps) {
 
         {/* Right side - Search and user */}
         <div className="flex items-center space-x-4">
-          {/* Search */}
-          <div className="relative">
-            <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-            <Input
-              placeholder="Search"
-              className="w-48 pl-8 h-8 text-sm"
-            />
-          </div>
-
+          
           {/* User dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

@@ -55,7 +55,7 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
           <div className="h-6 w-6 bg-black rounded-md flex items-center justify-center">
             <div className="h-3 w-3 bg-white rounded-sm" />
           </div>
-          <span className="font-semibold">Basepoint</span>
+          <span className="font-semibold">Atomatio</span>
         </div>
       </div>
 
