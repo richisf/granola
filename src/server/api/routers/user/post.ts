@@ -1,21 +1,16 @@
 import { z } from "zod";
 import bcrypt from "bcryptjs";
+import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
-import {
-  createTRPCRouter,
-  protectedProcedure,
-  publicProcedure,
-} from "~/server/api/trpc";
-
-const registerSchema = z.object({
+const userSchema = z.object({
   name: z.string().min(2),
   email: z.string().email(),
   password: z.string().min(6),
 });
 
-export const authRouter = createTRPCRouter({
-  register: publicProcedure
-    .input(registerSchema)
+export const User = createTRPCRouter({
+  post: publicProcedure
+    .input(userSchema)
     .mutation(async ({ ctx, input }) => {
       const { name, email, password } = input;
 
@@ -46,8 +41,4 @@ export const authRouter = createTRPCRouter({
         email: user.email,
       };
     }),
-
-  getSession: publicProcedure.query(({ ctx }) => {
-    return ctx.session;
-  }),
-});
+}); 
