@@ -1,19 +1,15 @@
-import { type ReactNode } from "react";
-import { MobileHeader } from "./header/component";
-import { MobileFooter } from "./footer/component";
+import { Header } from "./header/component";
+import { Footer } from "./footer/component";
+import { Body } from "./body/component";
 
-interface MobileLayoutProps {
-  children: ReactNode;
-}
-
-export function MobileLayout({ children }: MobileLayoutProps) {
+export function Mobile() {
   return (
     <div className="min-h-screen flex flex-col">
-      <MobileHeader />
+      <Header />
       <main className="flex-1">
-        {children}
+        <Body />
       </main>
-      <MobileFooter />
+      <Footer />
     </div>
   );
 }

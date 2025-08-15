@@ -3,7 +3,7 @@ import { Button } from "~/app/_components/shared/ui/button";
 import { Card, CardContent } from "~/app/_components/shared/ui/card";
 import { Badge } from "~/app/_components/shared/ui/badge";
 
-export function MobileBody() {
+export function Body() {
   return (
     <div className="bg-white">
       {/* Hero Section */}

@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { Button } from "~/app/_components/shared/ui/button";
 import { Badge } from "~/app/_components/shared/ui/badge";
-import { DashboardPreview } from "./dashboard/component";
+import { Dashboard } from "./dashboard/component";
 
-export function DesktopBody() {
+export function Body() {
   return (
     <div className="bg-white mt-12">
       {/* Hero Section */}
@@ -43,7 +43,7 @@ export function DesktopBody() {
 
       {/* Dashboard Preview Section */}
       <div className="mx-auto w-full sm:max-w-[95%] md:max-w-[92%] lg:max-w-[88%] xl:max-w-[85%] px-4 py-6">
-        <DashboardPreview />
+        <Dashboard />
       </div>
       
     </div>

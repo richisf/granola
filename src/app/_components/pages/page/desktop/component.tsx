@@ -1,18 +1,18 @@
 import { type ReactNode } from "react";
-import { DesktopHeader } from "./header/component";
-import { DesktopBody } from "./body/component";
-import { DesktopFooter } from "./footer/component";
+import { Header } from "./header/component";
+import { Body } from "./body/component";
+import { Footer } from "./footer/component";
 
-interface DesktopLayoutProps {
+interface DesktopProps {
   children?: ReactNode;
 }
 
-export function DesktopLayout({ children }: DesktopLayoutProps) {
+export function Desktop({ children }: DesktopProps) {
   return (
     <div className="max-w-screen min-h-screen flex flex-col">
       {/* Header - fixed at top */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-white border-b">
-        <DesktopHeader />
+        <Header />
       </div>
 
       {/* Main content area with boundary lines - with top padding for fixed header */}
@@ -31,12 +31,12 @@ export function DesktopLayout({ children }: DesktopLayoutProps) {
 
         {/* Content */}
         <div className="relative z-10">
-          {children ?? <DesktopBody />}
+          {children ?? <Body />}
         </div>
       </main>
 
       {/* Footer - no boundary lines */}
-      <DesktopFooter />
+      <Footer />
     </div>
   );
 }

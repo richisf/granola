@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Button } from "~/app/_components/shared/ui/button";
 import { Separator } from "~/app/_components/shared/ui/separator";
 
-export function MobileFooter() {
+export function Footer() {
   return (
     <footer className="bg-black text-white">
       <div className="mx-auto px-6 py-12">

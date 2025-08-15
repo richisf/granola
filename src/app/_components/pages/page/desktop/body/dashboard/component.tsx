@@ -4,7 +4,7 @@ import { Header } from "~/app/_components/pages/dashboard/header/component";
 import { Sidebar } from "~/app/_components/pages/dashboard/sidebar/component";
 import { Table } from "~/app/_components/pages/dashboard/main/table/component";
 
-export function DashboardPreview() {
+export function Dashboard() {
   return (
     <div className="h-[600px] w-full bg-gray-50 overflow-hidden border rounded-lg shadow-lg pointer-events-none select-none">
       <div className="h-full flex">

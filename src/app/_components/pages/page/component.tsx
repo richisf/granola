@@ -3,14 +3,13 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useIsMobile } from "~/app/_components/shared/hooks/use-mobile";
-import { DesktopLayout } from "~/app/_components/pages/page/desktop/component";
-import { MobileLayout } from "~/app/_components/pages/page/mobile/component";
-import { MobileBody } from "~/app/_components/pages/page/mobile/body/component";
+import { Desktop } from "~/app/_components/pages/page/desktop/component";
+import { Mobile } from "~/app/_components/pages/page/mobile/component";
 
 
 export function Page() {
 const { data: session, status } = useSession();
-  const router = useRouter();
+  const router = useRouter(); 
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -34,16 +33,12 @@ const { data: session, status } = useSession();
 
   // Show desktop version by default until mobile detection is complete
   if (isMobile === undefined) {
-    return <DesktopLayout />;
+    return <Desktop />;
   }
 
   if (isMobile) {
-    return (
-      <MobileLayout>
-        <MobileBody />
-      </MobileLayout>
-    );
+      return <Mobile />;
   }
 
-  return <DesktopLayout />;
+  return <Desktop />;
 }

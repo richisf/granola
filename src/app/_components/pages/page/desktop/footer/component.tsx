@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export function DesktopFooter() {
+export function Footer() {
   return (
     <footer className="bg-black text-white">
       <div className="mx-auto w-full sm:max-w-[95%] md:max-w-[92%] lg:max-w-[88%] xl:max-w-[85%] px-4 py-16">

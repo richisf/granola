@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Button } from "~/app/_components/shared/ui/button";
 
-export function MobileHeader() {
+export function Header() {
   return (
     <header className="border-b bg-white">
       <div className="mx-auto px-6">
@@ -11,7 +11,7 @@ export function MobileHeader() {
             <Link href="/" className="flex items-center space-x-2">
               <div className="text-xl font-bold text-gray-900">atomatmio</div>
             </Link>
-          </div>
+          </div>  
 
           {/* Auth buttons */}
           <div className="flex items-center space-x-2">

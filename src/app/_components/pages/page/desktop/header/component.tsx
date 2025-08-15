@@ -10,7 +10,7 @@ import {
   NavigationMenuTrigger,
 } from "~/app/_components/shared/ui/navigation-menu";
 
-export function DesktopHeader() {
+export function Header() {
   return (
     <header className="bg-white">
       <div className="mx-auto w-full sm:max-w-[95%] md:max-w-[92%] lg:max-w-[88%] xl:max-w-[85%] px-4">
