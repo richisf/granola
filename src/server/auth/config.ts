@@ -70,7 +70,7 @@ export const authConfig = {
     })
   ],
   pages: {
-    signIn: "/login",
+    signIn: "/auth/login",
   },
   adapter: PrismaAdapter(db),
   session: {

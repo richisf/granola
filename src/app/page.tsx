@@ -3,11 +3,10 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { useIsMobile } from "~/app/_components/hooks/use-mobile";
-import { DesktopLayout } from "~/app/_components/landing/desktop/layout";
-import { DesktopBody } from "~/app/_components/landing/desktop/body";
-import { MobileLayout } from "~/app/_components/landing/mobile/layout";
-import { MobileBody } from "~/app/_components/landing/mobile/body";
+import { useIsMobile } from "~/app/_components/shared/hooks/use-mobile";
+import { DesktopLayout } from "~/app/_components/pages/page/desktop/page";
+import { MobileLayout } from "~/app/_components/pages/page/mobile/page";
+import { MobileBody } from "~/app/_components/pages/page/mobile/body/page";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -23,8 +22,7 @@ export default function Home() {
   // Show loading state while checking auth
   if (status === "loading") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-gray-600">Loading...</div>
+      <div className="min-h-screen">
       </div>
     );
   }
