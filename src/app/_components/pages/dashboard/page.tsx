@@ -9,7 +9,7 @@ import { Table } from "~/app/_components/pages/dashboard/main/table/page";
 import { Notes } from "~/app/_components/pages/dashboard/main/notes/page";
 import { Notifications } from "~/app/_components/pages/dashboard/main/notifications/page";
 import { Tasks } from "~/app/_components/pages/dashboard/main/tasks/page";
-import { Skeleton } from "~/app/_components/ui/skeleton";
+import { Skeleton } from "~/app/_components/shared/ui/skeleton";
 
 export function Dashboard() {
   const { data: session, status } = useSession();
