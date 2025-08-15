@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useIsMobile } from "~/app/_components/shared/hooks/use-mobile";
-import { DesktopLayout } from "~/app/_components/pages/page/desktop/page";
-import { MobileLayout } from "~/app/_components/pages/page/mobile/page";
-import { MobileBody } from "~/app/_components/pages/page/mobile/body/page";
+import { DesktopLayout } from "~/app/_components/pages/page/desktop/component";
+import { MobileLayout } from "~/app/_components/pages/page/mobile/component";
+import { MobileBody } from "~/app/_components/pages/page/mobile/body/component";
 
 
 export function Page() {

@@ -1,8 +1,8 @@
 "use client";
 
-import { Header } from "~/app/_components/pages/dashboard/header/page";
-import { Sidebar } from "~/app/_components/pages/dashboard/sidebar/page";
-import { Table } from "~/app/_components/pages/dashboard/main/table/page";
+import { Header } from "~/app/_components/pages/dashboard/header/component";
+import { Sidebar } from "~/app/_components/pages/dashboard/sidebar/component";
+import { Table } from "~/app/_components/pages/dashboard/main/table/component";
 
 export function DashboardPreview() {
   return (

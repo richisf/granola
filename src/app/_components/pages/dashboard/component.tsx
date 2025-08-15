@@ -3,12 +3,12 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Header } from "~/app/_components/pages/dashboard/header/page";
-import { Sidebar } from "~/app/_components/pages/dashboard/sidebar/page";
-import { Table } from "~/app/_components/pages/dashboard/main/table/page";
-import { Notes } from "~/app/_components/pages/dashboard/main/notes/page";
-import { Notifications } from "~/app/_components/pages/dashboard/main/notifications/page";
-import { Tasks } from "~/app/_components/pages/dashboard/main/tasks/page";
+import { Header } from "~/app/_components/pages/dashboard/header/component";
+import { Sidebar } from "~/app/_components/pages/dashboard/sidebar/component";
+import { Table } from "~/app/_components/pages/dashboard/main/table/component";
+import { Notes } from "~/app/_components/pages/dashboard/main/notes/component";
+import { Notifications } from "~/app/_components/pages/dashboard/main/notifications/component";
+import { Tasks } from "~/app/_components/pages/dashboard/main/tasks/component";
 import { Skeleton } from "~/app/_components/shared/ui/skeleton";
 
 export function Dashboard() {

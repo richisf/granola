@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Button } from "~/app/_components/shared/ui/button";
 import { Badge } from "~/app/_components/shared/ui/badge";
-import { DashboardPreview } from "./dashboard/page";
+import { DashboardPreview } from "./dashboard/component";
 
 export function DesktopBody() {
   return (

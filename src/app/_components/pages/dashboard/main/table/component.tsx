@@ -1,7 +1,7 @@
 "use client";
 
-import { CompaniesTable } from "./table/page";
-import { TableHeader } from "./header/page";
+import { CompaniesTable } from "./table/component";
+import { TableHeader } from "./header/component";
 
 export function Table() {
   return (

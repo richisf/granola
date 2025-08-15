@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
-import { MobileHeader } from "./header/page";
-import { MobileFooter } from "./footer/page";
+import { MobileHeader } from "./header/component";
+import { MobileFooter } from "./footer/component";
 
 interface MobileLayoutProps {
   children: ReactNode;

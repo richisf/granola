@@ -1,7 +1,7 @@
 import { type ReactNode } from "react";
-import { DesktopHeader } from "./header/page";
-import { DesktopBody } from "./body/page";
-import { DesktopFooter } from "./footer/page";
+import { DesktopHeader } from "./header/component";
+import { DesktopBody } from "./body/component";
+import { DesktopFooter } from "./footer/component";
 
 interface DesktopLayoutProps {
   children?: ReactNode;

@@ -19,7 +19,7 @@ export function Signup() {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const registerMutation = api.auth.register.useMutation({
+  const userMutation = api.user.post.useMutation({
     onSuccess: async () => {
       // Automatically sign in the user after successful registration
       try {
@@ -55,7 +55,7 @@ export function Signup() {
       return;
     }
 
-    registerMutation.mutate({
+    userMutation.mutate({
       name,
       email,
       password,
@@ -132,9 +132,9 @@ export function Signup() {
               <Button 
                 type="submit" 
                 className="w-full"
-                disabled={registerMutation.isPending}
+                disabled={userMutation.isPending}
               >
-                {registerMutation.isPending ? "Creating account..." : "Sign Up"}
+                {userMutation.isPending ? "Creating account..." : "Sign Up"}
               </Button>
             </form>
             
