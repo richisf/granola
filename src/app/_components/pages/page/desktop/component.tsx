@@ -1,13 +1,9 @@
-import { type ReactNode } from "react";
+
 import { Header } from "./header/component";
 import { Body } from "./body/component";
 import { Footer } from "./footer/component";
 
-interface DesktopProps {
-  children?: ReactNode;
-}
-
-export function Desktop({ children }: DesktopProps) {
+export function Desktop() {
   return (
     <div className="max-w-screen min-h-screen flex flex-col">
       {/* Header - fixed at top */}
@@ -31,7 +27,7 @@ export function Desktop({ children }: DesktopProps) {
 
         {/* Content */}
         <div className="relative z-10">
-          {children ?? <Body />}
+          <Body />
         </div>
       </main>
 
