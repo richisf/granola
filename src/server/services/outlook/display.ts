@@ -62,6 +62,44 @@ export interface TeamsTranscriptsResponse {
   '@odata.nextLink'?: string;
 }
 
+export interface GraphCalendarEvent {
+  id: string;
+  subject: string;
+  organizer: {
+    emailAddress: {
+      name: string;
+      address: string;
+    };
+  };
+  start: {
+    dateTime: string;
+    timeZone: string;
+  };
+  end: {
+    dateTime: string;
+    timeZone: string;
+  };
+  onlineMeeting?: {
+    joinUrl: string;
+  };
+  attendees: Array<{
+    emailAddress: {
+      name: string;
+      address: string;
+    };
+    status: {
+      response: string;
+      time: string;
+    };
+  }>;
+  isOnlineMeeting: boolean;
+}
+
+export interface GraphCalendarEventsResponse {
+  value: GraphCalendarEvent[];
+  '@odata.nextLink'?: string;
+}
+
 export class TeamsTranscriptService {
   private static readonly GRAPH_BASE_URL = "https://graph.microsoft.com/v1.0";
 
@@ -184,41 +222,41 @@ export class TeamsTranscriptService {
         throw new Error(`Failed to fetch meetings from date: ${error}`);
       }
 
-      const data = await response.json() as { value: any[] };
+      const data = await response.json() as GraphCalendarEventsResponse;
       
       // Transform calendar events to our meeting format
-      const meetings: TeamsMeeting[] = data.value.map(event => ({
+      const meetings: TeamsMeeting[] = data.value.map((event: GraphCalendarEvent) => ({
         id: event.id,
-        subject: event.subject || 'Untitled Meeting',
+        subject: event.subject ?? 'Untitled Meeting',
         organizer: {
           identity: {
             user: {
-              id: event.organizer?.emailAddress?.address || '',
-              displayName: event.organizer?.emailAddress?.name || 'Unknown',
+              id: event.organizer?.emailAddress?.address ?? '',
+              displayName: event.organizer?.emailAddress?.name ?? 'Unknown',
               tenantId: ''
             }
           }
         },
-        startDateTime: event.start?.dateTime || '',
-        endDateTime: event.end?.dateTime || '',
-        joinWebUrl: event.onlineMeeting?.joinUrl || '',
+        startDateTime: event.start?.dateTime ?? '',
+        endDateTime: event.end?.dateTime ?? '',
+        joinWebUrl: event.onlineMeeting?.joinUrl ?? '',
         participants: {
           organizer: {
             identity: {
               user: {
-                id: event.organizer?.emailAddress?.address || '',
-                displayName: event.organizer?.emailAddress?.name || 'Unknown'
+                id: event.organizer?.emailAddress?.address ?? '',
+                displayName: event.organizer?.emailAddress?.name ?? 'Unknown'
               }
             }
           },
-          attendees: event.attendees?.map((attendee: any) => ({
+          attendees: event.attendees?.map((attendee) => ({
             identity: {
               user: {
-                id: attendee.emailAddress?.address || '',
-                displayName: attendee.emailAddress?.name || 'Unknown'
+                id: attendee.emailAddress?.address ?? '',
+                displayName: attendee.emailAddress?.name ?? 'Unknown'
               }
             }
-          })) || []
+          })) ?? []
         }
       }));
 
