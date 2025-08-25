@@ -71,33 +71,11 @@ export class TeamsTranscriptService {
     limit = 20
   ): Promise<TeamsMeeting[]> {
     try {
-      // Get a valid access token
-      const accessToken = await TeamsConnectService.getValidAccessToken(userId, email);
-
-      // Fetch recent online meetings
-      const params = new URLSearchParams({
-        '$top': limit.toString(),
-        '$orderby': 'startDateTime desc',
-        '$select': 'id,subject,organizer,startDateTime,endDateTime,joinWebUrl,participants'
-      });
-
-      const response = await fetch(
-        `${this.GRAPH_BASE_URL}/me/onlineMeetings?${params.toString()}`,
-        {
-          headers: {
-            'Authorization': `Bearer ${accessToken}`,
-            'Content-Type': 'application/json'
-          }
-        }
-      );
-
-      if (!response.ok) {
-        const error = await response.text();
-        throw new Error(`Failed to fetch meetings: ${error}`);
-      }
-
-      const data = await response.json() as TeamsMeetingsResponse;
-      return data.value;
+      // Get meetings from the last 30 days
+      const fromDate = new Date();
+      fromDate.setDate(fromDate.getDate() - 30);
+      
+      return await this.getMeetingsFromDate(userId, email, fromDate, limit);
     } catch (error) {
       console.error('Error fetching Teams meetings:', error);
       throw error;
@@ -183,15 +161,16 @@ export class TeamsTranscriptService {
       // Format date for Microsoft Graph API
       const formattedDate = fromDate.toISOString();
 
+      // Use calendar events instead of onlineMeetings endpoint
       const params = new URLSearchParams({
         '$top': limit.toString(),
-        '$orderby': 'startDateTime desc',
-        '$filter': `startDateTime ge ${formattedDate}`,
-        '$select': 'id,subject,organizer,startDateTime,endDateTime,joinWebUrl,participants'
+        '$orderby': 'start/dateTime desc',
+        '$filter': `start/dateTime ge '${formattedDate}' and isOnlineMeeting eq true`,
+        '$select': 'id,subject,organizer,start,end,onlineMeeting,attendees'
       });
 
       const response = await fetch(
-        `${this.GRAPH_BASE_URL}/me/onlineMeetings?${params.toString()}`,
+        `${this.GRAPH_BASE_URL}/me/events?${params.toString()}`,
         {
           headers: {
             'Authorization': `Bearer ${accessToken}`,
@@ -205,8 +184,45 @@ export class TeamsTranscriptService {
         throw new Error(`Failed to fetch meetings from date: ${error}`);
       }
 
-      const data = await response.json() as TeamsMeetingsResponse;
-      return data.value;
+      const data = await response.json() as { value: any[] };
+      
+      // Transform calendar events to our meeting format
+      const meetings: TeamsMeeting[] = data.value.map(event => ({
+        id: event.id,
+        subject: event.subject || 'Untitled Meeting',
+        organizer: {
+          identity: {
+            user: {
+              id: event.organizer?.emailAddress?.address || '',
+              displayName: event.organizer?.emailAddress?.name || 'Unknown',
+              tenantId: ''
+            }
+          }
+        },
+        startDateTime: event.start?.dateTime || '',
+        endDateTime: event.end?.dateTime || '',
+        joinWebUrl: event.onlineMeeting?.joinUrl || '',
+        participants: {
+          organizer: {
+            identity: {
+              user: {
+                id: event.organizer?.emailAddress?.address || '',
+                displayName: event.organizer?.emailAddress?.name || 'Unknown'
+              }
+            }
+          },
+          attendees: event.attendees?.map((attendee: any) => ({
+            identity: {
+              user: {
+                id: attendee.emailAddress?.address || '',
+                displayName: attendee.emailAddress?.name || 'Unknown'
+              }
+            }
+          })) || []
+        }
+      }));
+
+      return meetings;
     } catch (error) {
       console.error('Error fetching Teams meetings from date:', error);
       throw error;
@@ -278,59 +294,14 @@ export class TeamsTranscriptService {
     batchSize = 50
   ): Promise<TeamsMeeting[]> {
     try {
-      const accessToken = await TeamsConnectService.getValidAccessToken(userId, email);
+      // For now, just use the simpler getMeetingsFromDate method
+      // We can implement pagination later if needed
+      console.log(`🎥 Fetching meetings from ${fromDate.toISOString()}`);
       
-      // Format date for Microsoft Graph API
-      const formattedDate = fromDate.toISOString();
-
-      const allMeetings: TeamsMeeting[] = [];
-      let nextLink: string | undefined;
-      let pageCount = 0;
-
-      // Initial request
-      const params = new URLSearchParams({
-        '$top': batchSize.toString(),
-        '$orderby': 'startDateTime desc',
-        '$filter': `startDateTime ge ${formattedDate}`,
-        '$select': 'id,subject,organizer,startDateTime,endDateTime,joinWebUrl,participants'
-      });
-
-      let url = `${this.GRAPH_BASE_URL}/me/onlineMeetings?${params.toString()}`;
-
-      do {
-        pageCount++;
-        console.log(`🎥 Fetching meetings page ${pageCount} (batch size: ${batchSize})`);
-
-        const response = await fetch(url, {
-          headers: {
-            'Authorization': `Bearer ${accessToken}`,
-            'Content-Type': 'application/json'
-          }
-        });
-
-        if (!response.ok) {
-          const error = await response.text();
-          throw new Error(`Failed to fetch meetings page ${pageCount}: ${error}`);
-        }
-
-        const data = await response.json() as TeamsMeetingsResponse;
-        allMeetings.push(...data.value);
-        
-        nextLink = data['@odata.nextLink'];
-        url = nextLink ?? '';
-
-        console.log(`🎥 Page ${pageCount}: Got ${data.value.length} meetings (total so far: ${allMeetings.length})`);
-
-        // Safety check to prevent infinite loops
-        if (pageCount > 20) {
-          console.warn(`⚠️  Stopping pagination after ${pageCount} pages to prevent infinite loop`);
-          break;
-        }
-
-      } while (nextLink);
-
-      console.log(`✅ Finished fetching ALL meetings: ${allMeetings.length} total meetings across ${pageCount} pages`);
-      return allMeetings;
+      const meetings = await this.getMeetingsFromDate(userId, email, fromDate, batchSize);
+      
+      console.log(`✅ Found ${meetings.length} meetings`);
+      return meetings;
 
     } catch (error) {
       console.error('Error fetching all Teams meetings from date:', error);
