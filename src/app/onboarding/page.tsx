@@ -61,7 +61,7 @@ function OnboardingContent() {
     setErrorMessage('');
 
     try {
-      // Generate Teams auth URL
+      // Generate Teams auth URL (using existing outlook auth endpoint)
       const response = await fetch('/api/teams/auth', {
         method: 'POST',
         headers: {
