@@ -31,9 +31,6 @@ export function Body() {
           </p>
 
           <div className="mt-8 flex flex-col gap-3">
-                         <Button size="lg" className="w-full" asChild>
-               <Link href="/sigup">Start for free</Link>
-             </Button>
             <Button variant="outline" size="lg" className="w-full">
               Talk to sales
             </Button>

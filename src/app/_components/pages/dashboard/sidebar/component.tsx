@@ -1,15 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { 
-  Building2, 
-  StickyNote, 
-  Bell, 
-  CheckSquare, 
-  Table
-} from "lucide-react";
+import { StickyNote } from "lucide-react";
 import { Button } from "~/app/_components/shared/ui/button";
-import { Badge } from "~/app/_components/shared/ui/badge";
 
 interface SidebarProps {
   activeSection: string;
@@ -17,26 +9,11 @@ interface SidebarProps {
 }
 
 const navigationItems = [
-  {
-    title: "Notifications",
-    icon: Bell,
-    id: "notifications",
-    badge: 3
-  },
-  {
-    title: "Tasks",
-    icon: CheckSquare,
-    id: "tasks"
-  },
+
   {
     title: "Notes",
     icon: StickyNote,
     id: "notes"
-  },
-  {
-    title: "Table",
-    icon: Table,
-    id: "table"
   }
 ];
 
@@ -72,11 +49,6 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
             >
               <item.icon className="mr-2 h-4 w-4" />
               {item.title}
-              {item.badge && (
-                <Badge variant="secondary" className="ml-auto text-xs">
-                  {item.badge}
-                </Badge>
-              )}
             </Button>
           ))}
         </div>

@@ -5,10 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Header } from "~/app/_components/pages/dashboard/header/component";
 import { Sidebar } from "~/app/_components/pages/dashboard/sidebar/component";
-import { Table } from "~/app/_components/pages/dashboard/main/table/component";
 import { Notes } from "~/app/_components/pages/dashboard/main/notes/component";
-import { Notifications } from "~/app/_components/pages/dashboard/main/notifications/component";
-import { Tasks } from "~/app/_components/pages/dashboard/main/tasks/component";
 import { Skeleton } from "~/app/_components/shared/ui/skeleton";
 
 export function Dashboard() {
@@ -24,16 +21,10 @@ export function Dashboard() {
 
   const renderContent = () => {
     switch (activeSection) {
-      case "table":
-        return <Table />;
       case "notes":
         return <Notes />;
-      case "notifications":
-        return <Notifications />;
-      case "tasks":
-        return <Tasks />;
       default:
-        return <Table />;
+        return <Notes />;
     }
   };
 

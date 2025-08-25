@@ -2,7 +2,6 @@
 
 import { Header } from "~/app/_components/pages/dashboard/header/component";
 import { Sidebar } from "~/app/_components/pages/dashboard/sidebar/component";
-import { Table } from "~/app/_components/pages/dashboard/main/table/component";
 
 export function Dashboard() {
   return (
@@ -21,10 +20,7 @@ export function Dashboard() {
           {/* Header - Only over main content */}
           <Header activeSection="table" />
           
-          {/* Content - Takes remaining height */}
-          <main className="flex-1 bg-white overflow-hidden">
-            <Table />
-          </main>
+
         </div>
       </div>
     </div>
